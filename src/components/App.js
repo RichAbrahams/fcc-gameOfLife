@@ -9,12 +9,14 @@ class App extends React.Component {
     super(props);
     this.increaseRows = this.increaseRows.bind(this);
     this.decreaseRows = this.decreaseRows.bind(this);
+    this.increaseColumns = this.increaseColumns.bind(this);
+    this.decreaseColumns = this.decreaseColumns.bind(this);
   }
 
 
 componentWillReceiveProps (next) {
-  console.log(next);
-  if (this.props.rows !== next.rows || this.props.columns !== next.columns) {
+  console.log('next props: ', next);
+  if (this.props.rows != next.rows || this.props.columns != next.columns) {
   this.props.actions.updateGrid(newGrid(next.rows, next.columns));
 }
 }
@@ -27,6 +29,14 @@ decreaseRows(){
   this.props.actions.decreaseRows(5);
 }
 
+increaseColumns () {
+  this.props.actions.increaseColumns(5);
+}
+decreaseColumns () {
+  this.props.actions.decreaseColumns(5);
+}
+
+
 render(){
 
   return (
@@ -36,6 +46,8 @@ render(){
       })}
       <button onClick={this.increaseRows}>rows +</button>
       <button onClick={this.decreaseRows}>rows -</button>
+      <button onClick={this.increaseColumns}>columns +</button>
+      <button onClick={this.decreaseColumns}>columns -</button>
     </div>
   );
 }
