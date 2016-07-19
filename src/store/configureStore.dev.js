@@ -6,6 +6,7 @@ import {createStore, compose} from 'redux';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
+  console.log('hit dev config');
   const store = createStore(rootReducer, initialState, compose(
     // Add other middleware on this line...
     window.devToolsExtension ? window.devToolsExtension() : f => f // add support for Redux dev tools

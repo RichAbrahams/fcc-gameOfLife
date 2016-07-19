@@ -48,7 +48,7 @@ export default {
   },
   stylus: {
     use: [
-      poststylus(['autoprefixer', 'rucksack-css', 'lost'])
+      poststylus(['autoprefixer', 'rucksack-css'])
     ]
   }
 };

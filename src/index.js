@@ -18,16 +18,6 @@ const initialState = {
 };
 const store = configureStore(initialState);
 
-/*
-store.dispatch(loadStore());
-componentWillMount (){
-    let p = newGrid(10,10);
-    console.log('grid', p);
-    let x = nextGrid(p);
-    console.log('nextGrid', x);
-}
-*/
-
 render (
   <Provider store={store}>
   <Router history={browserHistory} routes={routes} />
