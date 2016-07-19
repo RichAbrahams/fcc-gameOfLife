@@ -12,8 +12,12 @@ export function decreaseRows(rows) {
   return {type: types.DECREASE_ROWS, rows};
 }
 
-export function updateColumns(columns) {
-  return {type: types.UPDATE_COLUMNS, columns};
+export function increaseColumns(columns) {
+  return {type: types.INCREASE_COLUMNS, columns};
+}
+
+export function decreaseColumns(columns) {
+  return {type: types.DECREASE_COLUMNS, columns};
 }
 
 export function updateRun(run) {
