@@ -4,8 +4,12 @@ export function updateGrid(grid) {
   return {type: types.UPDATE_GRID, grid};
 }
 
-export function updateRows(rows) {
-  return {type: types.UPDATE_ROWS, rows};
+export function increaseRows(rows) {
+  return {type: types.INCREASE_ROWS, rows};
+}
+
+export function decreaseRows(rows) {
+  return {type: types.DECREASE_ROWS, rows};
 }
 
 export function updateColumns(columns) {
