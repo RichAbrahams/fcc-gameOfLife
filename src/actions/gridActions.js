@@ -27,3 +27,7 @@ export function updateRun(run) {
 export function updateGenerations(generations) {
   return {type: types.UPDATE_GENERATIONS, generations};
 }
+
+export function updateSquareSize(size) {
+  return {type: types.UPDATE_SQUARE_SIZE, size};
+}

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as gridActions from '../actions/gridActions';
 import {newGrid} from '../logic/gridFunctions';
+import GridCanvas from './GridCanvas';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,6 @@ class App extends React.Component {
     this.increaseColumns = this.increaseColumns.bind(this);
     this.decreaseColumns = this.decreaseColumns.bind(this);
   }
-
 
 componentWillReceiveProps (next) {
   console.log('next props: ', next);
@@ -41,9 +41,7 @@ render(){
 
   return (
     <div>
-      {this.props.grid.map((item, index) => {
-        return <div key={index}>{item}</div>
-      })}
+      <GridCanvas />
       <button onClick={this.increaseRows}>rows +</button>
       <button onClick={this.decreaseRows}>rows -</button>
       <button onClick={this.increaseColumns}>columns +</button>
