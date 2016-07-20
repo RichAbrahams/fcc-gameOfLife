@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as gridActions from '../actions/gridActions';
-import {newGrid} from '../logic/gridFunctions';
+import {newGrid, nextGrid} from '../logic/gridFunctions';
 import GridCanvas from './GridCanvas';
 
 class App extends React.Component {
@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.increaseDensity = this.increaseDensity.bind(this);
     this.decreaseDensity = this.decreaseDensity.bind(this);
+    this.startTimer = this.startTimer.bind(this);
   }
 
 componentWillReceiveProps (next) {
@@ -26,6 +27,15 @@ decreaseDensity(){
   this.props.actions.decreaseDensity(10);
 }
 
+startTimer(){
+
+  const x = setInterval(() => {
+    let y = nextGrid(this.props.grid);
+    this.props.actions.updateGrid(y);
+  },1000);
+
+}
+
 render(){
 
   return (
@@ -33,6 +43,7 @@ render(){
       <GridCanvas />
       <button onClick={this.increaseDensity}>Density +</button>
       <button onClick={this.decreaseDensity}>Density -</button>
+      <button onClick={this.startTimer}>Start</button>
     </div>
   );
 }

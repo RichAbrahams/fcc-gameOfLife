@@ -9,6 +9,11 @@ class GridCanvas extends React.Component {
     super(props);
   }
 
+shouldComponentUpdate(){
+  this.drawCanvas();
+  return false;
+}
+
   drawCanvas(){
      let myCanvas = ReactDOM.findDOMNode(this.refs.myCanvas);
      const ctx = this.refs.myCanvas.getContext('2d');
@@ -30,10 +35,6 @@ class GridCanvas extends React.Component {
 
   componentDidMount() {
       this.drawCanvas();
-  }
-
-  componentWillUpdate(){
-
   }
 
   render() {
