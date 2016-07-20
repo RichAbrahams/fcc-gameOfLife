@@ -4,20 +4,12 @@ export function updateGrid(grid) {
   return {type: types.UPDATE_GRID, grid};
 }
 
-export function increaseRows(rows) {
-  return {type: types.INCREASE_ROWS, rows};
+export function increaseDensity(density) {
+  return {type: types.INCREASE_DENSITY, density};
 }
 
-export function decreaseRows(rows) {
-  return {type: types.DECREASE_ROWS, rows};
-}
-
-export function increaseColumns(columns) {
-  return {type: types.INCREASE_COLUMNS, columns};
-}
-
-export function decreaseColumns(columns) {
-  return {type: types.DECREASE_COLUMNS, columns};
+export function decreaseDensity(density) {
+  return {type: types.DECREASE_DENSITY, density};
 }
 
 export function updateRun(run) {

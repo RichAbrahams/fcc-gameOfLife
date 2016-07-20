@@ -2,18 +2,16 @@
 import {
     combineReducers
 } from 'redux';
-import columnsReducer from './columnsReducer';
 import generationsReducer from './generationsReducer';
 import gridReducer from './gridReducer';
-import rowsReducer from './rowsReducer';
+import densityReducer from './densityReducer';
 import runReducer from './runReducer';
 import squareSizeReducer from './squareSizeReducer';
 
 const rootReducer = combineReducers({
-    columns: columnsReducer,
+    density: densityReducer,
     generations: generationsReducer,
     grid: gridReducer,
-    rows: rowsReducer,
     run: runReducer,
     squareSize: squareSizeReducer
 });
