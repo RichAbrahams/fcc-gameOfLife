@@ -19,8 +19,8 @@ class GridCanvas extends React.Component {
         ctx.strokeStyle = "black";
         let xcord = row * this.props.squareSize;
         let ycord = column * this.props.squareSize;
-        console.log('x:', xcord, 'y:',ycord, 'xTo:', xcord + this.props.squareSize, 'yTo:', ycord + this.props.squareSize);
-        ctx.fillRect(xcord, ycord, xcord * row, ycord + this.props.squareSize);
+        //console.log('x:', xcord, 'y:',ycord, 'xTo:', xcord + this.props.squareSize, 'yTo:', ycord + this.props.squareSize);
+        ctx.fillRect(xcord, ycord, xcord + this.props.squareSize, ycord + this.props.squareSize);
         ctx.strokeRect(xcord, ycord, xcord + this.props.squareSize, ycord + this.props.squareSize);
         ctx.stroke();
         ctx.fill();

@@ -8,13 +8,13 @@ import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
 import {newGrid} from './logic/gridFunctions';
 
-const initialGrid = newGrid(50,50);
+const initialGrid = newGrid(10,10);
 const initialState = {
   grid: initialGrid,
-  density: 50,
+  density: 10,
   run: true,
   generations: 0,
-  squareSize: 10
+  squareSize: 50
 };
 const store = configureStore(initialState);
 
