@@ -20,6 +20,22 @@ const genGrid = (height, width) => {
   return grid;
 };
 
+const genBlankRow = (width) => {
+  let row = [];
+  for (let i = 0; i < width; i++){
+    row.push(0);
+  }
+  return row;
+};
+
+const genBlankGrid = (height, width) => {
+  let grid = [];
+  for (let i = 0; i < height; i++){
+    grid.push(genBlankRow(width));
+  }
+  return grid;
+};
+
 const cellScore  = (input, row, col) => {
   let score = 0;
   const scorePositions = [[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]]; // [row,col]
@@ -82,6 +98,9 @@ export const nextGrid = (gameGrid) => {
     return scoreGrid(gameGrid);
   };
 
+export const blankGrid = (height, width) => {
+  return genBlankGrid(height, width);
+};
 
 export const newGrid  = (height, width) => {
   return genGrid(height, width);

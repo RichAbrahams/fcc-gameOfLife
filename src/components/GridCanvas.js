@@ -21,8 +21,8 @@ class GridCanvas extends React.Component {
         }
 
         drawCanvas() {
-        const myCanvas = ReactDOM.findDOMNode(this.refs.myCanvas);
-        const ctx = this.refs.myCanvas.getContext('2d');
+        const canvas = ReactDOM.findDOMNode(this.refs.canvas);
+        const ctx = this.refs.canvas.getContext('2d');
         const grid = this.props.grid;
         const squareSize = this.props.squareSize;
         ctx.lineWidth = 1;
@@ -56,7 +56,7 @@ class GridCanvas extends React.Component {
       return (
           <div>
               <canvas
-                ref="myCanvas"
+                ref="canvas"
                 style={canvasStyle}
                 width={this.props.canvas[0]}
                 height={this.props.canvas[1]}/>

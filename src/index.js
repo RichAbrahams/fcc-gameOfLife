@@ -15,7 +15,7 @@ const initialState = {
   generations: 0,
   squareSize: 10,
   canvas: [750,500],
-  speed: 300
+  speed: 250
 };
 const store = configureStore(initialState);
 

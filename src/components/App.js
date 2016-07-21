@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as gridActions from '../actions/gridActions';
-import {newGrid, nextGrid} from '../logic/gridFunctions';
+import {newGrid, nextGrid, blankGrid} from '../logic/gridFunctions';
 import GridCanvas from './GridCanvas';
 
 class App extends React.Component {
@@ -15,6 +15,13 @@ class App extends React.Component {
             this.increaseSpeed = this.increaseSpeed.bind(this);
             this.decreaseSpeed = this.decreaseSpeed.bind(this);
             this.setTimer = this.setTimer.bind(this);
+            this.clearGrid = this.clearGrid.bind(this);
+
+        }
+
+
+        componentDidMount() {
+          this.setTimer();
         }
 
         calcGrid(size) {
@@ -48,17 +55,42 @@ class App extends React.Component {
             }
         }
 
-        increaseSpeed(){
-          if (this.props.speed > 100){
-            let newSpeed = this.props.speed - 100;
-            this.props.actions.updateSpeed(newSpeed);
+        decreaseSpeed(){
+
+          switch (this.props.speed){
+            case 50:
+              this.props.actions.updateSpeed(100);
+              break;
+            case 100:
+              this.props.actions.updateSpeed(250);
+              break;
+            case 250:
+              this.props.actions.updateSpeed(500);
+              break;
+            case 500:
+              this.props.actions.updateSpeed(1000);
+              break;
+            default:
+              break;
           }
         }
 
-        decreaseSpeed(){
-          if (this.props.speed < 1000){
-            let newSpeed = this.props.speed + 100;
-            this.props.actions.updateSpeed(newSpeed);
+        increaseSpeed(){
+          switch (this.props.speed){
+            case 1000:
+              this.props.actions.updateSpeed(500);
+              break;
+            case 500:
+              this.props.actions.updateSpeed(250);
+              break;
+            case 250:
+              this.props.actions.updateSpeed(100);
+              break;
+            case 100:
+              this.props.actions.updateSpeed(50);
+              break;
+            default:
+              break;
           }
         }
 
@@ -80,14 +112,19 @@ class App extends React.Component {
         }
 
         newRandomGrid(){
-          let size = this.calcGrid(this.props.squareSize)
+          let size = this.calcGrid(this.props.squareSize);
           let gridTemplate = newGrid(size[0], size[1]);
           this.props.actions.updateGenerations(0);
           this.props.actions.updateGrid(gridTemplate);
+          if (this.props.run) {this.startTimer();}
         }
 
-        componentDidMount() {
-          this.setTimer();
+        clearGrid(){
+          let size = this.calcGrid(this.props.squareSize);
+          let gridTemplate = blankGrid(size[0], size[1]);
+          this.props.actions.updateGenerations(0);
+          this.props.actions.updateGrid(gridTemplate);
+          if (this.props.run) {this.startTimer();}
         }
 
         render(){
@@ -102,6 +139,7 @@ class App extends React.Component {
               <p>{this.props.speed}</p>
               <button onClick={this.startTimer}>{timerLabel}</button>
               <button onClick={this.newRandomGrid}>New Grid</button>
+              <button onClick={this.clearGrid}>Clear Grid</button>
               <p>{this.props.generations}</p>
             </div>
           );
