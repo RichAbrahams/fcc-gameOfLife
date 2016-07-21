@@ -21,36 +21,29 @@ class GridCanvas extends React.Component {
         }
 
         drawCanvas() {
-            const myCanvas = ReactDOM.findDOMNode(this.refs.myCanvas);
-            const ctx = this.refs.myCanvas.getContext('2d');
-            const grid = this.props.grid;
-            const squareSize = this.props.squareSize;
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = "#888";
-            for (let row = 0; row < 1; row++) {
-                for (let column = 0; column < 5; column++) {
-                    let xcoord = column * squareSize;
-                    let ycoord = row * squareSize;
-                    ctx.fillRect(xcoord, ycoord, xcoord + squareSize, ycoord + squareSize);
-                    ctx.strokeRect(xcoord, ycoord, xcoord + squareSize, ycoord + squareSize);
-                    if (row == 0 && column == 0){ctx.fillStyle = 'red'} else {
-                    ctx.fillStyle = grid[row][column] == 1 ? '#222' : '#fff';
-                    }
-                    ctx.fill();
-                    ctx.stroke();
-                }
+        const myCanvas = ReactDOM.findDOMNode(this.refs.myCanvas);
+        const ctx = this.refs.myCanvas.getContext('2d');
+        const grid = this.props.grid;
+        const squareSize = this.props.squareSize;
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#888";
+        for (let row = 0; row < grid.length; row++) {
+            for (let column = 0; column < grid[0].length; column++) {
+                ctx.fillStyle = grid[row][column] == 1 ? '#222' : '#fff';
+                let xcoord = column * squareSize;
+                let ycoord = row * squareSize;
+                ctx.fillRect(xcoord, ycoord, squareSize, squareSize);
+                ctx.strokeRect(xcoord, ycoord, squareSize, squareSize);
             }
-            ctx.canvas.addEventListener('click', this.gridClick);
         }
+        ctx.canvas.addEventListener('click', this.gridClick);
+    }
 
         gridClick(e) {
-            console.log('click');
-            console.log(e);
             let mouseX = e.clientX - e.target.offsetLeft;
             let mouseY = e.clientY - e.target.offsetTop;
             let row = Math.floor((this.props.grid.length / e.target.height) * mouseY);
             let column = Math.floor((this.props.grid[0].length / e.target.width) * mouseX);
-            console.log(row, column);
             let newGrid = deepcopy(this.props.grid);
             newGrid[row][column] = newGrid[row][column] == 1 ? 0 : 1;
             this.props.actions.updateGrid(newGrid);
