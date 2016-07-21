@@ -24,3 +24,8 @@ export function updateRun(run) {
 export function updateGenerations(generations) {
   return {type: types.UPDATE_GENERATIONS, generations};
 }
+
+
+export function updateSpeed(speed) {
+  return {type: types.UPDATE_SPEED, speed};
+}

@@ -12,6 +12,9 @@ class App extends React.Component {
             this.decreaseSquareSize = this.decreaseSquareSize.bind(this);
             this.startTimer = this.startTimer.bind(this);
             this.newRandomGrid = this.newRandomGrid.bind(this);
+            this.increaseSpeed = this.increaseSpeed.bind(this);
+            this.decreaseSpeed = this.decreaseSpeed.bind(this);
+            this.setTimer = this.setTimer.bind(this);
         }
 
         calcGrid(size) {
@@ -45,9 +48,35 @@ class App extends React.Component {
             }
         }
 
+        increaseSpeed(){
+          if (this.props.speed > 100){
+            let newSpeed = this.props.speed - 100;
+            this.props.actions.updateSpeed(newSpeed);
+          }
+        }
+
+        decreaseSpeed(){
+          if (this.props.speed < 1000){
+            let newSpeed = this.props.speed + 100;
+            this.props.actions.updateSpeed(newSpeed);
+          }
+        }
+
         startTimer() {
             let newRun = !this.props.run;
             this.props.actions.updateRun(newRun);
+        }
+
+        setTimer() {
+          const timer = setTimeout(() => {
+              if (this.props.run) {
+                  let grid = nextGrid(this.props.grid);
+                  this.props.actions.updateGrid(grid);
+                  this.props.actions.updateGenerations(this.props.generations + 1);
+
+              }
+              this.setTimer();
+          }, this.props.speed);
         }
 
         newRandomGrid(){
@@ -58,13 +87,7 @@ class App extends React.Component {
         }
 
         componentDidMount() {
-            const timer = setInterval(() => {
-                if (this.props.run) {
-                    let grid = nextGrid(this.props.grid);
-                    this.props.actions.updateGrid(grid);
-                    this.props.actions.updateGenerations(this.props.generations + 1);
-                }
-            }, 100);
+          this.setTimer();
         }
 
         render(){
@@ -74,8 +97,11 @@ class App extends React.Component {
               <GridCanvas />
               <button onClick={this.increaseSquareSize}>Squares +</button>
               <button onClick={this.decreaseSquareSize}>Squares -</button>
+              <button onClick={this.increaseSpeed}>Speed + </button>
+              <button onClick={this.decreaseSpeed}>Speed - </button>
+              <p>{this.props.speed}</p>
               <button onClick={this.startTimer}>{timerLabel}</button>
-                <button onClick={this.newRandomGrid}>New Grid</button>
+              <button onClick={this.newRandomGrid}>New Grid</button>
               <p>{this.props.generations}</p>
             </div>
           );
@@ -87,7 +113,8 @@ function mapStateToProps(state) {
         grid: state.grid,
         squareSize: state.squareSize,
         run: state.run,
-        generations: state.generations
+        generations: state.generations,
+        speed: state.speed
     };
 }
 
