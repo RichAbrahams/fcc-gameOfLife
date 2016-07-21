@@ -11,6 +11,7 @@ class App extends React.Component {
             this.increaseSquareSize = this.increaseSquareSize.bind(this);
             this.decreaseSquareSize = this.decreaseSquareSize.bind(this);
             this.startTimer = this.startTimer.bind(this);
+            this.newRandomGrid = this.newRandomGrid.bind(this);
         }
 
         calcGrid(size) {
@@ -21,7 +22,7 @@ class App extends React.Component {
         }
 
         increaseSquareSize() {
-            if (this.props.squareSize < 200) {
+            if (this.props.squareSize < 50) {
                 let gridCalc = this.calcGrid(this.props.squareSize + 5);
                 let canvHeight = gridCalc[0] * (this.props.squareSize + 5);
                 let canvWidth = gridCalc[1] * (this.props.squareSize + 5);
@@ -49,6 +50,13 @@ class App extends React.Component {
             this.props.actions.updateRun(newRun);
         }
 
+        newRandomGrid(){
+          let size = this.calcGrid(this.props.squareSize)
+          let gridTemplate = newGrid(size[0], size[1]);
+          this.props.actions.updateGenerations(0);
+          this.props.actions.updateGrid(gridTemplate);
+        }
+
         componentDidMount() {
             const timer = setInterval(() => {
                 if (this.props.run) {
@@ -67,6 +75,7 @@ class App extends React.Component {
               <button onClick={this.increaseSquareSize}>Squares +</button>
               <button onClick={this.decreaseSquareSize}>Squares -</button>
               <button onClick={this.startTimer}>{timerLabel}</button>
+                <button onClick={this.newRandomGrid}>New Grid</button>
               <p>{this.props.generations}</p>
             </div>
           );
