@@ -1,15 +1,16 @@
 import * as types from '../constants/actionTypes';
 
+
 export function updateGrid(grid) {
   return {type: types.UPDATE_GRID, grid};
 }
 
-export function increaseDensity(density) {
-  return {type: types.INCREASE_DENSITY, density};
+export function increaseSquareSize(size) {
+  return {type: types.INCREASE_SQUARE_SIZE, size};
 }
 
-export function decreaseDensity(density) {
-  return {type: types.DECREASE_DENSITY, density};
+export function decreaseSquareSize(size) {
+  return {type: types.DECREASE_SQUARE_SIZE, size};
 }
 
 export function updateRun(run) {
@@ -18,8 +19,4 @@ export function updateRun(run) {
 
 export function updateGenerations(generations) {
   return {type: types.UPDATE_GENERATIONS, generations};
-}
-
-export function updateSquareSize(size) {
-  return {type: types.UPDATE_SQUARE_SIZE, size};
 }

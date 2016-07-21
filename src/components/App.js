@@ -8,32 +8,47 @@ import GridCanvas from './GridCanvas';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.increaseDensity = this.increaseDensity.bind(this);
-    this.decreaseDensity = this.decreaseDensity.bind(this);
+    this.increaseSquareSize = this.increaseSquareSize.bind(this);
+    this.decreaseSquareSize = this.decreaseSquareSize.bind(this);
     this.startTimer = this.startTimer.bind(this);
   }
 
-componentWillReceiveProps (next) {
-  if (this.props.density != next.density) {
-  this.props.actions.updateGrid(newGrid(next.density, next.density));
-}
-}
-
-increaseDensity(){
-  this.props.actions.increaseDensity(10);
+calcGrid (size) {
+  let rows = Math.floor(500 / size);
+  let columns = Math.floor(750 / size);
+  let output = [rows, columns];
+  return output;
 }
 
-decreaseDensity(){
-  this.props.actions.decreaseDensity(10);
+increaseSquareSize(){
+  if (this.props.squareSize < 50){
+    let gridCalc = this.calcGrid(this.props.squareSize + 5);
+    this.props.actions.increaseSquareSize([5,gridCalc[0],gridCalc[1]]);
+    this.props.actions.updateGenerations(0);
+  }
+}
+
+decreaseSquareSize(){
+  if (this.props.squareSize > 10) {
+    let gridCalc = this.calcGrid(this.props.squareSize - 5);
+    this.props.actions.decreaseSquareSize([5,gridCalc[0],gridCalc[1]]);
+    this.props.actions.updateGenerations(0);
+  }
 }
 
 startTimer(){
+let newRun = !this.props.run;
+this.props.actions.updateRun(newRun);
+}
 
-  const x = setInterval(() => {
-    let y = nextGrid(this.props.grid);
-    this.props.actions.updateGrid(y);
-  },1000);
-
+componentDidMount(){
+      const timer = setInterval(() => {
+        if (this.props.run) {
+        let grid = nextGrid(this.props.grid);
+        this.props.actions.updateGrid(grid);
+        this.props.actions.updateGenerations(this.props.generations+1);
+      }
+    },100);
 }
 
 render(){
@@ -41,9 +56,10 @@ render(){
   return (
     <div>
       <GridCanvas />
-      <button onClick={this.increaseDensity}>Density +</button>
-      <button onClick={this.decreaseDensity}>Density -</button>
+      <button onClick={this.increaseSquareSize}>Squares +</button>
+      <button onClick={this.decreaseSquareSize}>Squares -</button>
       <button onClick={this.startTimer}>Start</button>
+      <p>{this.props.generations}</p>
     </div>
   );
 }
@@ -52,7 +68,7 @@ render(){
 function mapStateToProps(state) {
   return {
     grid: state.grid,
-    density: state.density,
+    squareSize: state.squareSize,
     run: state.run,
     generations: state.generations
   };
