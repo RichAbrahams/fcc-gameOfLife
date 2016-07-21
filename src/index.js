@@ -13,7 +13,8 @@ const initialState = {
   grid: initialGrid,
   run: false,
   generations: 0,
-  squareSize: 10
+  squareSize: 10,
+  canvas: [750,500]
 };
 const store = configureStore(initialState);
 

@@ -6,12 +6,15 @@ import generationsReducer from './generationsReducer';
 import gridReducer from './gridReducer';
 import runReducer from './runReducer';
 import squareSizeReducer from './squareSizeReducer';
+import canvasReducer from './canvasReducer';
+
 
 const rootReducer = combineReducers({
     generations: generationsReducer,
     grid: gridReducer,
     run: runReducer,
-    squareSize: squareSizeReducer
+    squareSize: squareSizeReducer,
+    canvas: canvasReducer
 });
 
 export default rootReducer;

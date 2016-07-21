@@ -21,9 +21,11 @@ calcGrid (size) {
 }
 
 increaseSquareSize(){
-  if (this.props.squareSize < 50){
+  if (this.props.squareSize < 200){
     let gridCalc = this.calcGrid(this.props.squareSize + 5);
-    this.props.actions.increaseSquareSize([5,gridCalc[0],gridCalc[1]]);
+    let canvHeight = gridCalc[0] * (this.props.squareSize + 5);
+    let canvWidth = gridCalc[1] * (this.props.squareSize + 5);
+    this.props.actions.increaseSquareSize([5,gridCalc[0],gridCalc[1],[canvWidth,canvHeight]]);
     this.props.actions.updateGenerations(0);
   }
 }
@@ -31,7 +33,9 @@ increaseSquareSize(){
 decreaseSquareSize(){
   if (this.props.squareSize > 10) {
     let gridCalc = this.calcGrid(this.props.squareSize - 5);
-    this.props.actions.decreaseSquareSize([5,gridCalc[0],gridCalc[1]]);
+    let canvHeight = gridCalc[0] * (this.props.squareSize - 5);
+    let canvWidth = gridCalc[1] * (this.props.squareSize - 5);
+    this.props.actions.decreaseSquareSize([5,gridCalc[0],gridCalc[1],[canvWidth,canvHeight]]);
     this.props.actions.updateGenerations(0);
   }
 }

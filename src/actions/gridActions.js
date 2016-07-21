@@ -5,6 +5,10 @@ export function updateGrid(grid) {
   return {type: types.UPDATE_GRID, grid};
 }
 
+export function updateCanvas(size) {
+  return {type: types.UPDATE_CANVAS, size};
+}
+
 export function increaseSquareSize(size) {
   return {type: types.INCREASE_SQUARE_SIZE, size};
 }
