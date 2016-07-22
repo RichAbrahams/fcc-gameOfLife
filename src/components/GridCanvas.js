@@ -26,10 +26,10 @@ class GridCanvas extends React.Component {
         const grid = this.props.grid;
         const squareSize = this.props.squareSize;
         ctx.lineWidth = 1;
-        ctx.strokeStyle = "#888";
+        ctx.strokeStyle = "#444";
         for (let row = 0; row < grid.length; row++) {
             for (let column = 0; column < grid[0].length; column++) {
-                ctx.fillStyle = grid[row][column] == 1 ? '#222' : '#fff';
+                ctx.fillStyle = grid[row][column] == 1 ? 'rgb(0, 255, 0)' : 'rgb(19, 12, 12)';
                 let xcoord = column * squareSize;
                 let ycoord = row * squareSize;
                 ctx.fillRect(xcoord, ycoord, squareSize, squareSize);
@@ -40,8 +40,8 @@ class GridCanvas extends React.Component {
     }
 
         gridClick(e) {
-            let mouseX = e.clientX - e.target.offsetLeft;
-            let mouseY = e.clientY - e.target.offsetTop;
+            let mouseX = (e.clientX - e.target.offsetLeft) - 8;
+            let mouseY = (e.clientY - e.target.offsetTop) - 8;
             let row = Math.floor((this.props.grid.length / e.target.height) * mouseY);
             let column = Math.floor((this.props.grid[0].length / e.target.width) * mouseX);
             let newGrid = deepcopy(this.props.grid);
@@ -54,7 +54,7 @@ class GridCanvas extends React.Component {
       backgroundColor: '#fff'
         };
       return (
-          <div>
+          <div className="canvasContainer">
               <canvas
                 ref="canvas"
                 style={canvasStyle}

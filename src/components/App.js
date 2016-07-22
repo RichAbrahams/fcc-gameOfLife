@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as gridActions from '../actions/gridActions';
@@ -16,9 +17,9 @@ class App extends React.Component {
             this.decreaseSpeed = this.decreaseSpeed.bind(this);
             this.setTimer = this.setTimer.bind(this);
             this.clearGrid = this.clearGrid.bind(this);
-
+            this.speedRange = this.speedRange.bind(this);
+            this.zoomRange = this.zoomRange.bind(this);
         }
-
 
         componentDidMount() {
           this.setTimer();
@@ -48,15 +49,23 @@ class App extends React.Component {
                 let gridCalc = this.calcGrid(this.props.squareSize - 5);
                 let canvHeight = gridCalc[0] * (this.props.squareSize - 5);
                 let canvWidth = gridCalc[1] * (this.props.squareSize - 5);
-                this.props.actions.decreaseSquareSize([5, gridCalc[0], gridCalc[1],
-                    [canvWidth, canvHeight]
-                ]);
+                this.props.actions.decreaseSquareSize([5, gridCalc[0], gridCalc[1],[canvWidth, canvHeight]]);
                 this.props.actions.updateGenerations(0);
             }
         }
 
-        decreaseSpeed(){
+        speedRange(){
+          let value = ReactDOM.findDOMNode(this.refs.speedSlider).value;
+          let speed = 1050 - value;
+          this.props.actions.updateSpeed(speed);
+        }
 
+        zoomRange(){
+          let value = ReactDOM.findDOMNode(this.refs.zoomSlider).value;
+          console.log('ZR: ', value);
+        }
+
+        decreaseSpeed(){
           switch (this.props.speed){
             case 50:
               this.props.actions.updateSpeed(100);
@@ -132,6 +141,9 @@ class App extends React.Component {
           return (
             <div>
               <GridCanvas />
+              <div className="buttonContainer">
+              <input ref="speedSlider" type="range" min="500" max="1000" onChange={this.speedRange}/>
+              <input ref="zoomSlider" type="range" min="10" max="50" onChange={this.zoomRange}/>
               <button onClick={this.increaseSquareSize}>Squares +</button>
               <button onClick={this.decreaseSquareSize}>Squares -</button>
               <button onClick={this.increaseSpeed}>Speed + </button>
@@ -141,6 +153,7 @@ class App extends React.Component {
               <button onClick={this.newRandomGrid}>New Grid</button>
               <button onClick={this.clearGrid}>Clear Grid</button>
               <p>{this.props.generations}</p>
+              </div>
             </div>
           );
         }
