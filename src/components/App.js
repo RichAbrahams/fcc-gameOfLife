@@ -9,12 +9,8 @@ import GridCanvas from './GridCanvas';
 class App extends React.Component {
         constructor(props) {
             super(props);
-            this.increaseSquareSize = this.increaseSquareSize.bind(this);
-            this.decreaseSquareSize = this.decreaseSquareSize.bind(this);
             this.startTimer = this.startTimer.bind(this);
             this.newRandomGrid = this.newRandomGrid.bind(this);
-            this.increaseSpeed = this.increaseSpeed.bind(this);
-            this.decreaseSpeed = this.decreaseSpeed.bind(this);
             this.setTimer = this.setTimer.bind(this);
             this.clearGrid = this.clearGrid.bind(this);
             this.speedRange = this.speedRange.bind(this);
@@ -32,28 +28,6 @@ class App extends React.Component {
             return output;
         }
 
-        increaseSquareSize() {
-            if (this.props.squareSize < 50) {
-                let gridCalc = this.calcGrid(this.props.squareSize + 5);
-                let canvHeight = gridCalc[0] * (this.props.squareSize + 5);
-                let canvWidth = gridCalc[1] * (this.props.squareSize + 5);
-                this.props.actions.increaseSquareSize([5, gridCalc[0], gridCalc[1],
-                    [canvWidth, canvHeight]
-                ]);
-                this.props.actions.updateGenerations(0);
-            }
-        }
-
-        decreaseSquareSize() {
-            if (this.props.squareSize > 10) {
-                let gridCalc = this.calcGrid(this.props.squareSize - 5);
-                let canvHeight = gridCalc[0] * (this.props.squareSize - 5);
-                let canvWidth = gridCalc[1] * (this.props.squareSize - 5);
-                this.props.actions.decreaseSquareSize([5, gridCalc[0], gridCalc[1],[canvWidth, canvHeight]]);
-                this.props.actions.updateGenerations(0);
-            }
-        }
-
         speedRange(){
           let value = ReactDOM.findDOMNode(this.refs.speedSlider).value;
           let speed = 1050 - value;
@@ -62,45 +36,11 @@ class App extends React.Component {
 
         zoomRange(){
           let value = ReactDOM.findDOMNode(this.refs.zoomSlider).value;
-          console.log('ZR: ', value);
-        }
-
-        decreaseSpeed(){
-          switch (this.props.speed){
-            case 50:
-              this.props.actions.updateSpeed(100);
-              break;
-            case 100:
-              this.props.actions.updateSpeed(250);
-              break;
-            case 250:
-              this.props.actions.updateSpeed(500);
-              break;
-            case 500:
-              this.props.actions.updateSpeed(1000);
-              break;
-            default:
-              break;
-          }
-        }
-
-        increaseSpeed(){
-          switch (this.props.speed){
-            case 1000:
-              this.props.actions.updateSpeed(500);
-              break;
-            case 500:
-              this.props.actions.updateSpeed(250);
-              break;
-            case 250:
-              this.props.actions.updateSpeed(100);
-              break;
-            case 100:
-              this.props.actions.updateSpeed(50);
-              break;
-            default:
-              break;
-          }
+          let gridDimensions = this.calcGrid(value);
+          let canvHeight = gridDimensions[0] * (value);
+          let canvWidth = gridDimensions[1] * (value);
+          this.props.actions.updateSquareSize([value, gridDimensions[0], gridDimensions[1],[canvWidth, canvHeight]]);
+          this.props.actions.updateGenerations(0);
         }
 
         startTimer() {
@@ -114,7 +54,6 @@ class App extends React.Component {
                   let grid = nextGrid(this.props.grid);
                   this.props.actions.updateGrid(grid);
                   this.props.actions.updateGenerations(this.props.generations + 1);
-
               }
               this.setTimer();
           }, this.props.speed);
@@ -142,12 +81,8 @@ class App extends React.Component {
             <div>
               <GridCanvas />
               <div className="buttonContainer">
-              <input ref="speedSlider" type="range" min="500" max="1000" onChange={this.speedRange}/>
+              <input ref="speedSlider" type="range" min="550" max="1020" onChange={this.speedRange}/>
               <input ref="zoomSlider" type="range" min="10" max="50" onChange={this.zoomRange}/>
-              <button onClick={this.increaseSquareSize}>Squares +</button>
-              <button onClick={this.decreaseSquareSize}>Squares -</button>
-              <button onClick={this.increaseSpeed}>Speed + </button>
-              <button onClick={this.decreaseSpeed}>Speed - </button>
               <p>{this.props.speed}</p>
               <button onClick={this.startTimer}>{timerLabel}</button>
               <button onClick={this.newRandomGrid}>New Grid</button>

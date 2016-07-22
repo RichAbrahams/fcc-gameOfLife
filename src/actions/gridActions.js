@@ -9,12 +9,8 @@ export function updateCanvas(size) {
   return {type: types.UPDATE_CANVAS, size};
 }
 
-export function increaseSquareSize(size) {
-  return {type: types.INCREASE_SQUARE_SIZE, size};
-}
-
-export function decreaseSquareSize(size) {
-  return {type: types.DECREASE_SQUARE_SIZE, size};
+export function updateSquareSize(size) {
+  return {type: types.UPDATE_SQUARE_SIZE, size};
 }
 
 export function updateRun(run) {

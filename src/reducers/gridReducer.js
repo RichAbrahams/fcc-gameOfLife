@@ -6,9 +6,7 @@ export default function gridReducer(state = [], action) {
         case types.UPDATE_GRID:
             state = action.grid;
             return state;
-        case types.INCREASE_SQUARE_SIZE:
-            return newGrid(action.size[1],action.size[2]);
-        case types.DECREASE_SQUARE_SIZE:
+        case types.UPDATE_SQUARE_SIZE:
             return newGrid(action.size[1],action.size[2]);
         default:
             return state;
