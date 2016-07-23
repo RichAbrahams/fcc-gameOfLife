@@ -7,6 +7,7 @@ import './styles/styles.styl';
 import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
 import {newGrid} from './logic/gridFunctions';
+require('../node_modules/font-awesome/css/font-awesome.css');
 
 const initialGrid = newGrid(50,75);
 const initialState = {

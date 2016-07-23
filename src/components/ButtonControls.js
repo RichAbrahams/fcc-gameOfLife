@@ -58,17 +58,17 @@ class ButtonControls extends React.Component {
         }
 
 render(){
-  const timerLabel = this.props.run ? 'Stop' : 'Start';
+  const startLabel = this.props.run ? 'fa fa-pause fa-3x' : 'fa fa-play fa-3x';
   return (
     <div className="buttonsContainer">
       <div className="startContainer">
-        <button onClick={this.startTimer}>{timerLabel}</button>
+        <button onClick={this.startTimer}><i className={startLabel} aria-hidden="true"></i></button>
       </div>
       <div className="newContainer">
-        <button onClick={this.newRandomGrid}>New Grid</button>
+        <button onClick={this.newRandomGrid}><i className="fa fa-refresh fa-3x" aria-hidden="true"></i></button>
       </div>
       <div className="clearContainer">
-        <button onClick={this.clearGrid}>Clear Grid</button>
+        <button onClick={this.clearGrid}><i className="fa fa-eraser fa-3x" aria-hidden="true"></i></button>
       </div>
     </div>
   );
