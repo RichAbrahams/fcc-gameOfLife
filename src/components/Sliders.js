@@ -48,7 +48,6 @@ class Sliders extends React.Component {
         }
         }
 
-
 render(){
   return (
       <div className ="sliderContainer">

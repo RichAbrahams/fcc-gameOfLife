@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
 import * as gridActions from '../actions/gridActions';
 import {connect} from 'react-redux';
@@ -13,7 +12,7 @@ class ButtonControls extends React.Component {
     this.newRandomGrid = this.newRandomGrid.bind(this);
     this.clearGrid = this.clearGrid.bind(this);
     this.setTimer = this.setTimer.bind(this);
-    this.buttonTransition = this.buttonTransition.bind(this)
+    this.buttonTransition = this.buttonTransition.bind(this);
     this.endButtonTransition = this.endButtonTransition.bind(this);
   }
 
@@ -99,6 +98,7 @@ class ButtonControls extends React.Component {
         }
 
 render(){
+
   const startLabel = this.props.run ? 'fa fa-pause fa-3x' : 'fa fa-play fa-3x';
   const startClass = this.props.buttons[0] ? 'startButton buttonTrans' : 'startButton';
   const newClass = this.props.buttons[1] ? 'newButton buttonTrans' : 'newButton';
