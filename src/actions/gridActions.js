@@ -21,7 +21,10 @@ export function updateGenerations(generations) {
   return {type: types.UPDATE_GENERATIONS, generations};
 }
 
-
 export function updateSpeed(speed) {
   return {type: types.UPDATE_SPEED, speed};
+}
+
+export function updateControlButtons(buttons){
+  return {type: types.UPDATE_BUTTONS, buttons};
 }

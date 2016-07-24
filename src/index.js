@@ -14,9 +14,10 @@ const initialState = {
   grid: initialGrid,
   run: false,
   generations: 0,
-  squareSize: 10,
+  squareSize: 30,
   canvas: [750,500],
-  speed: 250
+  speed: 235,
+  buttons: [false,false,false]
 };
 const store = configureStore(initialState);
 

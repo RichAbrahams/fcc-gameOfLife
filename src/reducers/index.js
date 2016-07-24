@@ -8,6 +8,7 @@ import runReducer from './runReducer';
 import squareSizeReducer from './squareSizeReducer';
 import canvasReducer from './canvasReducer';
 import speedReducer from './speedReducer';
+import buttonReducer from './buttonsReducer';
 
 const rootReducer = combineReducers({
     generations: generationsReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     run: runReducer,
     squareSize: squareSizeReducer,
     canvas: canvasReducer,
-    speed: speedReducer
+    speed: speedReducer,
+    buttons: buttonReducer
 });
 
 export default rootReducer;
