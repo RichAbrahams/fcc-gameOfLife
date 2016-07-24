@@ -11,10 +11,25 @@ class Sliders extends React.Component {
     this.zoomRange = this.zoomRange.bind(this);
   }
 
-        calcGrid(size) {
-            let rows = Math.floor(500 / size);
-            let columns = Math.floor(750 / size);
-            let output = [rows, columns];
+// factors [6,12,20,30,60]
+
+        calcGrid(value) {
+            const sizes = [6,12,20,30,60]
+            let size;
+            if (value > 80) {
+              size = 60;
+            } else if (value > 60) {
+              size = 30;
+            } else if (value > 40) {
+              size = 20;
+            } else if (value > 20) {
+              size = 12;
+            } else {
+              size = 6;
+            }
+            let rows = Math.floor(420 / size);
+            let columns = Math.floor(720 / size);
+            let output = [size, rows, columns];
             return output;
         }
 
@@ -26,11 +41,11 @@ class Sliders extends React.Component {
 
         zoomRange(){
           let value = ReactDOM.findDOMNode(this.refs.zoomSlider).value;
-          let gridDimensions = this.calcGrid(value);
-          let canvHeight = gridDimensions[0] * (value);
-          let canvWidth = gridDimensions[1] * (value);
-          this.props.actions.updateSquareSize([value, gridDimensions[0], gridDimensions[1],[canvWidth, canvHeight]]);
+          let rangeResult = this.calcGrid(value);
+          if (this.props.squareSize != rangeResult[0]){
+          this.props.actions.updateSquareSize(rangeResult);
           this.props.actions.updateGenerations(0);
+        }
         }
 
 
@@ -46,8 +61,8 @@ render(){
         <input className="zoomSlider"
           ref="zoomSlider"
           type="range"
-          min="10"
-          max="50"
+          min="0"
+          max="100"
           onChange={this.zoomRange}/>
       </div>
   );

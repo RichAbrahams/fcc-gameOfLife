@@ -15,7 +15,7 @@ const initialState = {
   run: false,
   generations: 0,
   squareSize: 30,
-  canvas: [750,500],
+  canvas: [720,420],
   speed: 235,
   buttons: [false,false,false]
 };

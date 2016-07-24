@@ -22,8 +22,8 @@ class ButtonControls extends React.Component {
         }
 
         calcGrid(size) {
-            let rows = Math.floor(500 / size);
-            let columns = Math.floor(750 / size);
+            let rows = Math.floor(420 / size);
+            let columns = Math.floor(720 / size);
             let output = [rows, columns];
             return output;
         }
