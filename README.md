@@ -1,9 +1,11 @@
 # fcc-gameOfLife
 
+Built using React + Redux.
+
 App can found at:
 
 https://tranquil-fortress-92245.herokuapp.com/
 
-This was built using Cory House's react-slingshot:
+Cory House's react-slingshot was used for project base skeleton:
 
 https://github.com/coryhouse/react-slingshot
